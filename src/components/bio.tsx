@@ -13,6 +13,8 @@ import { rhythm } from "../utils/typography"
 
 const Content = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: ${rhythm(2.5)};
 `
 
@@ -34,7 +36,7 @@ export const Bio = () => {
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {
-          fixed(width: 50, height: 50) {
+          fixed(width: 100, height: 100) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -42,15 +44,12 @@ export const Bio = () => {
       site {
         siteMetadata {
           author
-          social {
-            twitter
-          }
         }
       }
     }
   `)
 
-  const { author, social } = data.site.siteMetadata
+  const { author } = data.site.siteMetadata
 
   return (
     <Content>
@@ -60,12 +59,7 @@ export const Bio = () => {
         imgStyle={{ borderRadius: "50%" }}
       />
       <p>
-        Written by <strong>{author}</strong> who lives and works in San
-        Francisco building useful things.
-        {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>
-          You should follow him on Twitter
-        </a>
+        👋 I'm <strong>{author}</strong>. I like to build things with JavaScript
       </p>
     </Content>
   )

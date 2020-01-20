@@ -1,82 +1,49 @@
-import { graphql, PageRendererProps, useStaticQuery } from "gatsby"
+import styled from "@emotion/styled"
+import { PageRendererProps } from "gatsby"
 import React from "react"
-import styled from "styled-components"
-import { Bio } from "../components/bio"
-import { Layout } from "../components/layout"
-import { FadeLink } from "../components/link"
+import Layout from "../components/layout"
 import { SEO } from "../components/seo"
-import { MarkdownRemark } from "../graphql-types"
-import { rhythm } from "../utils/typography"
-
-const StyledLink = styled(FadeLink)`
-  box-shadow: none;
-`
-
-const Title = styled.h3`
-  margin-bottom: ${rhythm(1 / 4)};
-`
+import Social from "../components/social"
 
 type Props = PageRendererProps
 
-const BlogIndex = (props: Props) => {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-        edges {
-          node {
-            excerpt
-            fields {
-              slug
-            }
-            frontmatter {
-              date(formatString: "MMMM DD, YYYY")
-              title
-              description
-            }
-          }
-        }
-      }
-    }
-  `)
+const IndexContainer = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+`
 
-  const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+const Greeting = styled("div")`
+  display: block;
+  text-align: center;
+  h1 {
+    font-weight: normal;
+    margin: 8px 0;
+  }
+  h3 {
+    margin: 0px;
+    font-weight: normal;
+  }
+`
 
+const Index = (props: Props) => {
   return (
-    <Layout location={props.location} title={siteTitle}>
-      <SEO
-        title="All posts"
-        keywords={[`blog`, `gatsby`, `javascript`, `react`]}
-      />
-      <Bio />
-      {posts.map(({ node }: { node: MarkdownRemark }) => {
-        const frontmatter = node!.frontmatter!
-        const fields = node!.fields!
-        const slug = fields.slug!
-        const excerpt = node!.excerpt!
-
-        const title = frontmatter.title || fields.slug
-        return (
-          <div key={slug}>
-            <Title>
-              <StyledLink to={slug}>{title}</StyledLink>
-            </Title>
-            <small>{frontmatter.date}</small>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: frontmatter.description || excerpt,
-              }}
-            />
-          </div>
-        )
-      })}
+    <Layout location={props.location} title="Nick Trabue - Javascript Dev">
+      <SEO title="🏠" />
+      <IndexContainer>
+        <Greeting>
+          <h1>
+            <strong>👋 Hello World!</strong>
+            <br />
+            I'm Nick Trabue
+          </h1>
+          <h3>I like building things with JavaScript</h3>
+          <Social />
+        </Greeting>
+      </IndexContainer>
     </Layout>
   )
 }
 
-export default BlogIndex
+export default Index

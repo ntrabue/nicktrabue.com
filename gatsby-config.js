@@ -1,14 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: `Kyle Mathews`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    title: `nicktrabue.com`,
+    author: `Nick Trabue`,
+    description: `Homepage of Nick Trabue`,
+    siteUrl: `https://nicktrabue.com`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `nicktrabue`,
     },
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-emotion`,
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -57,8 +60,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `nicktrabue.com`,
+        short_name: `nicktrabue`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
