@@ -46,6 +46,8 @@ export const createPages: GatsbyCreatePages = async ({
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
     const next = index === 0 ? null : posts[index - 1].node
 
+    // const blogPostPath = `/blog/${post.node.fields.slug.replace(/-/g, "/")}`
+
     createPage({
       path: post.node.fields.slug,
       // tslint:disable-next-line:object-literal-sort-keys

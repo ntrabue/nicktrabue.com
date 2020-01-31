@@ -1,4 +1,4 @@
-import { faHome, faThList } from "@fortawesome/free-solid-svg-icons"
+import { faBook, faHome, faThList } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
 import React from "react"
@@ -42,10 +42,10 @@ const Nav = () => {
         <FontAwesomeIcon icon={faThList} />
         Resume
       </NavLink>
-      {/* <NavLink to="/blog" activeClassName="active">
+      <NavLink to="/blog" activeClassName="active">
         <FontAwesomeIcon icon={faBook} />
         Blog
-      </NavLink> */}
+      </NavLink>
     </NavContainer>
   )
 }
