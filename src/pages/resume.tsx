@@ -88,16 +88,7 @@ const Resume = (props: Props) => {
           place="CARFAX"
           date="Oct. 2019 - Present"
           title="Product Developer"
-          description={
-            <p>
-              Currently working on{" "}
-              <a href="https://carfax.com/Service">CARFAX Car Care</a> on the
-              consumer development team. Car Care aims to help consumers keep
-              their cars well-maintained by tracking past and upcoming car
-              maintenence along with notifying them about recalls and repair
-              costs associated with their vehicle.
-            </p>
-          }
+          description={<p>Currently on the consumer development team.</p>}
           experience={[
             "JavaScript",
             "Typescript",
