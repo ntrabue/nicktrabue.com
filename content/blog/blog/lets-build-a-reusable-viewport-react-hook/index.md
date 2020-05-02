@@ -42,7 +42,7 @@ const ViewContext = React.createContext({
 })
 ```
 
-Now, just underneat that, we're going to create our context provider that will wrap our entire app.
+Now, just underneath that, we're going to create our context provider that will wrap our entire app.
 
 ```js
 const smallScreenMaxWidth = 579
