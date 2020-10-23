@@ -20,12 +20,22 @@ const Content = Styled.div`
 `
 
 export const Layout = (props: Props) => {
-  const [darkThemeActive, toggleDarkTheme] = useState(true)
+  const colorPreference = localStorage.getItem("theme")
+  const getInitialColorPreference = (): boolean => {
+    if (colorPreference && colorPreference === "light") {
+      return false
+    }
+    return true
+  }
+  const [darkThemeActive, toggleDarkTheme] = useState(
+    getInitialColorPreference()
+  )
   const { children } = props
 
   const activeTheme = darkThemeActive ? darkTheme : lightTheme
   
   function toggleDarkMode() {
+    localStorage.setItem("theme", darkThemeActive ? "dark" : "light")
     return toggleDarkTheme(!darkThemeActive)
   }
 
