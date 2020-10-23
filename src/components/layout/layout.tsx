@@ -39,7 +39,8 @@ export const Layout = (props: Props) => {
   const activeTheme = darkThemeActive ? darkTheme : lightTheme
 
   function toggleDarkMode() {
-    localStorage.setItem("theme", darkThemeActive ? "dark" : "light")
+    // these need to be oposites because we haven't changed the value of the hook yet
+    localStorage.setItem("theme", darkThemeActive ? "light" : "dark")
     return toggleDarkTheme(!darkThemeActive)
   }
 
