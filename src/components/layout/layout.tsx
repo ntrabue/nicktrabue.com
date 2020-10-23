@@ -20,7 +20,7 @@ const Content = Styled.div`
 `
 
 export const Layout = (props: Props) => {
-  const [darkThemeActive, toggleDarkTheme] = useState(false)
+  const [darkThemeActive, toggleDarkTheme] = useState(true)
   const { children } = props
 
   useEffect(() => {
