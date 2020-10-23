@@ -2,7 +2,7 @@ import { css, Global } from "@emotion/core"
 import Styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import { PageRendererProps } from "gatsby"
-import React, { ReactNode, useState } from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import { rhythm } from "../../utils/typography"
 import Nav from "../nav"
 import { darkTheme, lightTheme } from "./theme"
@@ -20,20 +20,24 @@ const Content = Styled.div`
 `
 
 export const Layout = (props: Props) => {
-  const colorPreference = localStorage.getItem("theme")
-  const getInitialColorPreference = (): boolean => {
-    if (colorPreference && colorPreference === "light") {
-      return false
-    }
-    return true
-  }
-  const [darkThemeActive, toggleDarkTheme] = useState(
-    getInitialColorPreference()
-  )
+  const [darkThemeActive, toggleDarkTheme] = useState(false)
   const { children } = props
 
+  useEffect(() => {
+    const getInitialColorPreference = (): boolean => {
+      if (colorPreference && colorPreference === "light") {
+        return false
+      }
+      return true
+    }
+    const colorPreference = localStorage?.getItem("theme")
+    if (colorPreference) {
+      toggleDarkTheme(getInitialColorPreference())
+    }
+  }, [])
+
   const activeTheme = darkThemeActive ? darkTheme : lightTheme
-  
+
   function toggleDarkMode() {
     localStorage.setItem("theme", darkThemeActive ? "dark" : "light")
     return toggleDarkTheme(!darkThemeActive)
