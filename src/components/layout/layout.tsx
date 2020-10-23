@@ -2,10 +2,10 @@ import { css, Global } from "@emotion/core"
 import Styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import { PageRendererProps } from "gatsby"
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState } from "react"
 import { rhythm } from "../../utils/typography"
 import Nav from "../nav"
-import { theme } from "./theme"
+import { darkTheme, lightTheme } from "./theme"
 
 interface Props extends PageRendererProps {
   title: string
@@ -20,12 +20,22 @@ const Content = Styled.div`
 `
 
 export const Layout = (props: Props) => {
+  const [darkThemeActive, toggleDarkTheme] = useState(true)
   const { children } = props
 
+  const activeTheme = darkThemeActive ? darkTheme : lightTheme
+  
+  function toggleDarkMode() {
+    return toggleDarkTheme(!darkThemeActive)
+  }
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={activeTheme}>
       <Global
         styles={css`
+          html {
+            background-color: ${activeTheme.colors.background};
+          }
           h1 {
             font-size: 3rem;
           }
@@ -42,10 +52,17 @@ export const Layout = (props: Props) => {
           a,
           h1,
           h2,
-          h3 {
-            color: ${theme.colors.text};
+          h3,
+          h4,
+          li,
+          span,
+          strong,
+          small {
+            color: ${activeTheme.colors.text};
           }
-
+          hr {
+            background-color: ${activeTheme.colors.text}
+          }
           code[class*="language-"],
           pre[class*="language-"] {
             color: #d6deeb;
@@ -208,7 +225,7 @@ export const Layout = (props: Props) => {
           }
         `}
       />
-      <Nav />
+      <Nav darkMode={darkThemeActive} toggleDarkMode={toggleDarkMode} />
       <Content>
         <main>{children}</main>
       </Content>
