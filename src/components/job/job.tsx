@@ -5,7 +5,7 @@ import TechnologiesUsed from "./job-list"
 interface IJob {
   place: string
   date: string
-  title: string
+  title?: string
   description: JSX.Element
   experience: string[]
 }
@@ -14,13 +14,18 @@ const JobContainer = styled.div`
   display: grid;
   margin: 10px 0;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg + "px"}) {
-    grid-template-columns: 2fr 4fr;
+    grid-template-columns: 2fr 3fr;
     grid-column-gap: 3%;
+  }
+
+  h4 {
+    margin: 10px 0;
   }
 `
 
 const Location = styled.h3`
   margin: 0px;
+  font-size: 1.6rem;
 `
 
 const Title = styled.h4`
@@ -38,7 +43,7 @@ const Job = ({ place, date, title, description, experience }: IJob) => {
         <span>{date}</span>
       </div>
       <div>
-        <Title>{title}</Title>
+        {title && <Title>{title}</Title>}
         {description}
         <TechnologiesUsed items={experience} />
       </div>
